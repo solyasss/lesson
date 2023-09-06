@@ -22,4 +22,5 @@ public:
 
 int main()
 {
+    Point a;
 }
