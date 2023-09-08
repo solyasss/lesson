@@ -4,122 +4,192 @@ using namespace std;
 class Fraction
 {
 private:
-    int numerator;
-    int denominator;
+    int numerator = 1;
+    int denominator = 1;
 
 public:
-    Fraction(int num = 0, int denom = 1) : numerator(num), denominator(denom)
+    void set_fraction(int _n, int _d)
     {
-        // check for a denominator equal to zero
-        if (denominator == 0)
-        {
-            cerr << "Error: Denominator cannot be zero." << endl;
-            exit(1);
-        }
+        numerator = _n;
+        denominator = _d;
     }
 
-    // function to set the numerator
-    void set_numerator(int num)
+    void display_fraction()
     {
-        numerator = num;
+        cout << "Fraction: " << numerator << "\t" << denominator << endl;
     }
 
-    // function to set the denominator
-    void set_denominator(int denom)
+    void add(int n, int d)
     {
-        if (denom != 0)
+
+        if (n > 0 && d > 0)
         {
-            denominator = denom;
+            numerator += n;
+            denominator += d;
         }
         else
         {
-            cerr << "Error! Denominator cannot be zero." << endl;
-            exit(1);
+            cout << "Addition is failed(" << endl;
         }
     }
 
-    int get_numerator() const
+    Fraction add(Fraction n)
+    {
+
+        Fraction result;
+
+        result.numerator = numerator + n.numerator;
+        result.denominator = denominator + n.denominator;
+
+        return result;
+    }
+
+    void multiply(int n, int d)
+    {
+
+        if (n > 0 && d > 0)
+        {
+            numerator *= n;
+            denominator *= d;
+        }
+        else
+        {
+            cout << " Multiplication is failed." << endl;
+        }
+    }
+
+    Fraction multiply(Fraction n)
+    {
+        Fraction result;
+
+        result.numerator = numerator * n.numerator;
+        result.denominator = denominator * n.denominator;
+
+        return result;
+    }
+
+    void subtract(int n, int d)
+    {
+
+        if (n > 0 && d > 0)
+        {
+            numerator -= n;
+            denominator -= d;
+        }
+        else
+        {
+            cout << " Subtraction is failed." << endl;
+        }
+    }
+
+    Fraction subtract(Fraction n)
+    {
+        Fraction result;
+
+        result.numerator = numerator - n.numerator;
+        result.denominator = denominator - n.denominator;
+
+        return result;
+    }
+
+    void divide(int n, int d)
+    {
+
+        if (n > 0 && d > 0)
+        {
+            numerator /= n;
+            denominator /= d;
+        }
+        else
+        {
+            cout << " Division is failed." << endl;
+        }
+    }
+
+    Fraction divide(Fraction n)
+    {
+        Fraction result;
+
+        result.numerator = numerator / n.numerator;
+        result.denominator = denominator / n.denominator;
+
+        return result;
+    }
+
+    void add_to_numerator(int n)
+    {
+        numerator += n;
+
+        if (n > 0)
+        {
+            numerator += n;
+        }
+        else
+        {
+            cout << "Failed " << endl;
+        }
+    }
+
+    void add_to_denominator(int n)
+    {
+        if (n > 0)
+        {
+            denominator += n;
+        }
+        else
+        {
+            cout << "Failed" << endl;
+        }
+    }
+
+    void set_numerator(int n)
+    {
+        if (n > 0)
+        {
+            numerator = n;
+        }
+        else
+        {
+            cout << "Failed" << endl;
+        }
+    }
+
+    void set_denominator(int n)
+    {
+        if (n > 0)
+        {
+            denominator = n;
+        }
+        else
+        {
+            cout << "Failed" << endl;
+        }
+    }
+
+    int get_numerator()
     {
         return numerator;
     }
 
-    int get_denominator() const
+    int get_denominator()
     {
         return denominator;
-    }
-
-    // function to add fractions
-    Fraction add(const Fraction &other) const
-    {
-        int result_numerator = numerator * other.denominator + other.numerator * denominator;
-        int result_denominator = denominator * other.denominator;
-        return Fraction(result_numerator, result_denominator);
-    }
-
-    // function to subtract fractions
-    Fraction subtract(const Fraction &other) const
-    {
-        int result_numerator = numerator * other.denominator - other.numerator * denominator;
-        int result_denominator = denominator * other.denominator;
-        return Fraction(result_numerator, result_denominator);
-    }
-
-    // Function to multiply fractions
-    Fraction multiply(const Fraction &other) const
-    {
-        int result_numerator = numerator * other.numerator;
-        int result_denominator = denominator * other.denominator;
-        return Fraction(result_numerator, result_denominator);
-    }
-
-    // Function to divide fractions
-    Fraction divide(const Fraction &other) const
-    {
-        if (other.numerator != 0)
-        {
-            int result_numerator = numerator * other.denominator;
-            int result_denominator = denominator * other.numerator;
-            return Fraction(result_numerator, result_denominator);
-        }
-        else
-        {
-            cerr << "Error: Division by zero." << endl;
-            exit(1);
-        }
-    }
-
-    // Function to display the fraction
-    void display() const
-    {
-        cout << numerator << "/" << denominator;
     }
 };
 
 int main()
 {
-    Fraction fraction1(1, 2);
-    Fraction fraction2(3, 4);
 
-    Fraction result_add = fraction1.add(fraction2);
-    Fraction resul_subtract = fraction1.subtract(fraction2);
-    Fraction result_multiply = fraction1.multiply(fraction2);
-    Fraction result_divide = fraction1.divide(fraction2);
+    Fraction n;
+    n.set_fraction(50, 100);
+    n.display_fraction();
 
-    cout << "Addition: ";
-    result_add.display();
-    cout << endl;
+    n.add(2, 2);
+    n.display_fraction();
 
-    cout << "Subtraction: ";
-    resul_subtract.display();
-    cout << endl;
+    Fraction d;
+    d.set_fraction(100, 150);
 
-    cout << "Multiplication: ";
-    result_multiply.display();
-    cout << endl;
-
-    cout << "Division: ";
-    result_divide.display();
-    cout << endl;
-
-    return 0;
+    Fraction sum = n.add(d);
+    sum.display_fraction();
 }
